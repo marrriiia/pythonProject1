@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="75f6e2dd-be47-47bc-b6f9-2c4c481af3c6" name="Changes" comment="Initial commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fastlab.py" beforeDir="false" afterPath="$PROJECT_DIR$/fastlab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/5030597107d922b00d90ad34b3a7ea18cd720785c27bc1ceb3be54857adbd279.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/5030597107d922b00d90ad34b3a7ea18cd720785c27bc1ceb3be54857adbd279.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/noisy_histogram_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/noisy_histogram_0.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716818150131</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1716818505007</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716818505007</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
