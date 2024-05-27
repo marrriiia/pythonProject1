@@ -27,7 +27,7 @@ async def make_image(request: Request,
                      files: List[UploadFile] = File(description="Multiple files as UploadFile"),
                      resp: str = Form()):
 
-    recaptcha_secret = "6LftbOgpAAAAAC8YIIB3p2x0s58eEnrzx-5Sw9t3"
+    recaptcha_secret = "6LdqEukpAAAAAMn590xdJxK88LfTiLFqh8QGTNVy"
 
     recaptcha_data = {
         'secret': recaptcha_secret,
