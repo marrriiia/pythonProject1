@@ -52,21 +52,11 @@
     <img src="{{ original_histogram_images[0] }}" alt="Original Histogram">
     <h3>Гистограмма зашумленного изображения</h3>
     <img src="{{ noisy_histogram_images[0] }}" alt="Noise Histogram">
+    <p>
+        <button onclick="window.open('/view_image', '_blank')">
+            Показать котика</button>
+    </p>
     {% endif %}
 </body>
 </html>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Форма загрузки изображений</title>
-</head>
-<body>
-    {% if ready %}
-        <form action="/smooth_image" method="post">
-            <input type="hidden" name="image_path" value="{{ images[0] }}">
-            <button type="submit">Сгладить изображение</button>
-        </form>
-    {% endif %}
-</body>
-</html>
