@@ -62,14 +62,6 @@
     <title>Форма загрузки изображений</title>
 </head>
 <body>
-    <h1>Загрузите изображения</h1>
-    <form action="/image_form" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" multiple>
-        <input type="number" name="noise_level" placeholder="Уровень шума" step="0.1">
-        <input type="hidden" name="resp" id="g-recaptcha-response">
-        <button type="submit">Загрузить</button>
-    </form>
-
     {% if ready %}
         <form action="/smooth_image" method="post">
             <input type="hidden" name="image_path" value="{{ images[0] }}">
