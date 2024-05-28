@@ -55,3 +55,41 @@
     {% endif %}
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма загрузки изображений</title>
+</head>
+<body>
+    <h1>Загрузите изображения</h1>
+    <form action="/image_form" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple>
+        <input type="number" name="noise_level" placeholder="Уровень шума" step="0.1">
+        <input type="hidden" name="resp" id="g-recaptcha-response">
+        <button type="submit">Загрузить</button>
+    </form>
+
+    {% if ready %}
+        <h2>Загруженные изображения:</h2>
+        {% for image in images %}
+            <img src="{{ url_for('static', path=image) }}" alt="Изображение с шумом" width="300">
+        {% endfor %}
+
+        <h2>Гистограммы оригинальных изображений:</h2>
+        {% for histogram in original_histogram_images %}
+            <img src="{{ url_for('static', path=histogram) }}" alt="Гистограмма оригинального изображения" width="300">
+        {% endfor %}
+
+        <h2>Гистограммы изображений с шумом:</h2>
+        {% for histogram in noisy_histogram_images %}
+            <img src="{{ url_for('static', path=histogram) }}" alt="Гистограмма изображения с шумом" width="300">
+        {% endfor %}
+
+        <form action="/smooth_image" method="post">
+            <input type="hidden" name="image_path" value="{{ images[0] }}">
+            <button type="submit">Сгладить изображение</button>
+        </form>
+    {% endif %}
+</body>
+</html>
