@@ -127,4 +127,4 @@ def create_histogram_image(histograms):
 @app.get("/show_histogram", response_class=HTMLResponse)
 async def show_histogram(request: Request):
     histogram_image = "static/noisy_histogram_0.png"
-    return templates.TemplateResponse("view_image.html", {"request": request, "histogram_image": histogram_image})
+    return templates.TemplateResponse("show_histogram.html", {"request": request, "histogram_image": histogram_image})
