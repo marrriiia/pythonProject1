@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import matplotlib.pyplot as plt
 import os
+import PIL
 from pathlib import Path
 
 app = FastAPI()
@@ -123,19 +124,7 @@ def create_histogram_image(histograms):
     buf.seek(0)
     return Image.open(buf)
 
-
-@app.post("/view_image")
-async def smooth_image(request: Request, image_path: str = Form()):
-    image = Image.open(image_path)
-    smoothed_image = image.filter(ImageFilter.GaussianBlur(radius=2))
-
-    smoothed_image_path = f"static/view_{os.path.basename(image_path)}"
-    smoothed_image.save(smoothed_image_path)
-
-    return templates.TemplateResponse("view_image.html",
-                                      {"request": request, "view_image_path": smoothed_image_path})
-
-
-@app.get("/view_image", response_class=HTMLResponse)
-async def show_smooth_image(request: Request):
-    return templates.TemplateResponse("view_image.html", {"request": request})
+@app.get("/show_histogram", response_class=HTMLResponse)
+async def show_histogram(request: Request):
+    histogram_image = "static/noisy_histogram_0.png"
+    return templates.TemplateResponse("view_image.html", {"request": request, "histogram_image": histogram_image})
