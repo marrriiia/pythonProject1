@@ -122,3 +122,15 @@ def create_histogram_image(histograms):
     plt.close()
     buf.seek(0)
     return Image.open(buf)
+
+
+@app.post("/view_image")
+async def smooth_image(request: Request, image_path: str = Form()):
+    image = Image.open(image_path)
+    smoothed_image = image.filter(ImageFilter.GaussianBlur(radius=2))
+
+    smoothed_image_path = f"static/view_{os.path.basename(image_path)}"
+    smoothed_image.save(smoothed_image_path)
+
+    return templates.TemplateResponse("view_image.html",
+                                      {"request": request, "view_image_path": smoothed_image_path})
