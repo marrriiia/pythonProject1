@@ -21,6 +21,10 @@ def read_root():
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+@app.get("/image_form", response_class=HTMLResponse)
+async def make_image(request: Request):
+    return templates.TemplateResponse("forms.html", {"request": request})
+
 @app.post("/image_form", response_class=HTMLResponse)
 async def make_image(request: Request,
                      noise_level: float = Form(),
@@ -57,9 +61,10 @@ async def make_image(request: Request,
 
         for i in range(len(p_images)):
             original_histogram = get_histogram(p_images[i])
-            noise = np.random.normal(0, noise_level, (p_images[i].size[0],p_images[i].size[1],3))
 
+            noise = np.random.normal(0, noise_level, (p_images[i].size[0],p_images[i].size[1],3))
             noisy_image = np.clip(p_images[i] + np.rot90(noise), 0, 255).astype(np.uint8)
+
             noisy_histogram = get_histogram(noisy_image)
 
             image_with_noise = Image.fromarray(noisy_image)
@@ -73,13 +78,18 @@ async def make_image(request: Request,
 
             original_histogram_image.save(original_histogram_image_path)
             noisy_histogram_image.save(noisy_histogram_image_path)
-
             original_histogram_images.append(original_histogram_image_path)
             noisy_histogram_images.append(noisy_histogram_image_path)
 
-        return templates.TemplateResponse("forms.html", {"request": request, "ready": ready, "images": [image + '.jpg' for image in images],
-                                                       "original_histogram_images": original_histogram_images,
-                                                       "noisy_histogram_images": noisy_histogram_images})
+        return templates.TemplateResponse("forms.html", {"request": request, "ready": ready,
+                                                         "images": [image + '.jpg' for image in images],
+                                                         "original_histogram_images": original_histogram_images,
+                                                         "noisy_histogram_images": noisy_histogram_images,})
+
+@app.get("/view_image", response_class=HTMLResponse)
+async def show_histogram(request: Request):
+    view_image = "static/view_image.png"
+    return templates.TemplateResponse("view_image.html", {"request": request, "view_image": view_image})
 
 def get_histogram(image):
     pixels = np.array(image)
@@ -112,12 +122,3 @@ def create_histogram_image(histograms):
     plt.close()
     buf.seek(0)
     return Image.open(buf)
-
-@app.get("/image_form", response_class=HTMLResponse)
-async def make_image(request: Request):
-    return templates.TemplateResponse("forms.html", {"request": request})
-
-@app.get("/view_image", response_class=HTMLResponse)
-async def show_histogram(request: Request):
-    view_image = "static/view_image.jpg"
-    return templates.TemplateResponse("view_image.html", {"request": request, "view_image": view_image})

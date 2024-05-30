@@ -1,7 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Какой-то сайт</title>
     <link rel="stylesheet" type="text/css" href="/static/styles.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -12,7 +14,6 @@
             token = response;
         };
 
-
         function submitForm() {
             if (token) {
                 document.getElementById('resp').value = token;
@@ -20,6 +21,10 @@
             } else {
                 alert('Пожалуйста, пройдите проверку reCAPTCHA.');
             }
+        }
+
+        function viewImage(imageName) {
+            window.location.href = `/view_image/${imageName}`;
         }
     </script>
 </head>
@@ -53,10 +58,8 @@
     <h3>Гистограмма зашумленного изображения</h3>
     <img src="{{ noisy_histogram_images[0] }}" alt="Noise Histogram">
     <p>
-        <button onclick="window.open('/view_image', '_blank')">
-            Показать котика</button>
+        <button onclick="window.open('/view_image', '_blank')">Показать котика</button>
     </p>
     {% endif %}
 </body>
 </html>
-
