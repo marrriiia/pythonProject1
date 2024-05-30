@@ -134,3 +134,8 @@ async def smooth_image(request: Request, image_path: str = Form()):
 
     return templates.TemplateResponse("view_image.html",
                                       {"request": request, "view_image_path": smoothed_image_path})
+
+
+@app.get("/view_image", response_class=HTMLResponse)
+async def show_smooth_image(request: Request):
+    return templates.TemplateResponse("view_image.html", {"request": request})
